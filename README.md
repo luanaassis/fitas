@@ -1,4 +1,5 @@
 # Fitas
+
 ## 💻 Grupo
 
 - [Fábio Augusto Araújo Santos](https://github.com/fabio-aug)
@@ -6,16 +7,13 @@
 
 ## 📰 Introdução
 
-
 ## 📂 Estrutura
 
 ## 🔨 Classes e Métodos
 
 ## 🔎 Análise de Complexidade
 
-
 ## 🔚 Conclusão
-
 
 ## 🏃 Instruções para compilação e execução
 
