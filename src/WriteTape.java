@@ -9,6 +9,23 @@ public class WriteTape {
         this.tape = new File("fita-" + numberOfTape + ".txt");
     }
 
+    public WriteTape(String fileName) {
+        this.tape = new File(fileName);
+    }
+
+    public void writeLine(Url url) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, true));
+
+            String text = "\n" + url.toString();
+
+            bw.write(text);
+            bw.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void write(Url[] array) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, false));

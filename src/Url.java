@@ -3,17 +3,10 @@ public class Url {
     private int numberOfTape;
     private int numberOfViews;
 
-    public Url(String url, int numberOfTape, int numberOfViews) {
+    public Url(String url, int numberOfViews, int numberOfTape) {
         this.url = url;
         this.numberOfTape = numberOfTape;
         this.numberOfViews = numberOfViews;
-    }
-
-    public Url(String entity, int numberOfTape) {
-        String[] data = entity.split(" ");
-        this.url = data[0];
-        this.numberOfTape = numberOfTape;
-        this.numberOfViews = Integer.parseInt(data[1]);
     }
 
     public String getUrl() {
@@ -24,11 +17,27 @@ public class Url {
         return numberOfTape;
     }
 
+    public void setNumberOfTape(int numberOfTape) {
+        this.numberOfTape = numberOfTape;
+    }
+
     public int getNumberOfViews() {
         return numberOfViews;
     }
 
     public String getEntity() {
+        return this.url + " " + this.numberOfViews;
+    }
+
+    public static Url fromStringRep(String s) {
+        String[] split = s.split(" ");
+        String url = split[0];
+        int views = Integer.valueOf(split[1]);
+        return new Url(url, views, 0);
+    }
+
+    @Override
+    public String toString() {
         return this.url + " " + this.numberOfViews;
     }
 }
