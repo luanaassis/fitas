@@ -26,6 +26,16 @@ public class WriteTape {
         }
     }
 
+    public void addSection() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, true));
+            bw.write("\n");
+            bw.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void write(Url[] array) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, false));

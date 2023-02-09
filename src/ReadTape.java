@@ -1,5 +1,4 @@
 import java.io.FileReader;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -7,10 +6,12 @@ import java.io.BufferedReader;
 public class ReadTape implements AutoCloseable, Iterable<Url> {
     private BufferedReader reader;
     private String fileName;
+    private Iterator<Url> interator;
 
     public ReadTape(String fileName) throws IOException {
         this.fileName = fileName;
         reader = new BufferedReader(new FileReader(fileName));
+        this.interator = iterator();
     }
 
     public String getFileName() {
@@ -23,8 +24,7 @@ public class ReadTape implements AutoCloseable, Iterable<Url> {
     }
 
     public Url readNextLine() {
-        Iterator<Url> it = iterator();
-        Url data = it.next();
+        Url data = interator.next();
         if (data != null) {
             int number = Integer.parseInt(fileName.split("-")[1].split(".txt")[0]);
             data.setNumberOfTape(number);
