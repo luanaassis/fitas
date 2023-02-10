@@ -64,9 +64,10 @@ public class QuickSortArray {
                 index++;
                 change(array, index, j);
             }
-            change(array, (index + 1), end);
         }
-
+        
+        change(array, (index + 1), end);
+        
         return index + 1;
     }
 

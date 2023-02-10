@@ -31,9 +31,13 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        String inputFileName = "input.txt";
-        String outputFileName = "output.txt";
-        int memorySize = 2;
+       String inputFileName = "input.txt";
+       String outputFileName = "output.txt";
+       int memorySize = 5;
+
+        //String inputFileName = (args[0]);
+        //String outputFileName = (args[1]);
+        //int memorySize = Integer.parseInt(args[2]);
 
         int numberOfTapes = readInputFile(inputFileName, memorySize);
         Intercalation changes = new Intercalation(numberOfTapes, memorySize, outputFileName);
