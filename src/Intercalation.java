@@ -22,7 +22,7 @@ public class Intercalation {
                     return -1;
                 }
             }
-            
+
             return +1;
         });
     }
@@ -41,17 +41,15 @@ public class Intercalation {
         ReadTape[] tapes = new ReadTape[tapesSize];
 
         for (int i = 0; i < tapesSize; i++) {
-            if (this.currentTape <= this.numberOfTapes) {
-                tapes[i] = new ReadTape("fita-" + this.currentTape + ".txt");
-                Url url = tapes[i].readNextLine();
-                if (url != null) {
-                    this.intercalationTapes.add(url);
-                }
-                this.currentTape++;
-            } else {
-                tapes[i] = null;
-                continue;
+            if (this.currentTape > this.numberOfTapes)
+                break;
+
+            tapes[i] = new ReadTape("fita-" + this.currentTape + ".txt");
+            Url url = tapes[i].readNextLine();
+            if (url != null) {
+                this.intercalationTapes.add(url);
             }
+            this.currentTape++;
         }
 
         return tapes;
@@ -62,12 +60,11 @@ public class Intercalation {
         ReadTape[] tapes = createTapes();
         while (true) {
             if (this.intercalationTapes.isEmpty()) {
-                if (this.currentTape > this.numberOfTapes) {
+                if (this.currentTape > this.numberOfTapes)
                     break;
-                } else {
-                    output.addSection();
-                    tapes = createTapes();
-                }
+
+                output.addSection();
+                tapes = createTapes();
             } else {
                 Url data = this.intercalationTapes.poll();
                 int index = findIndex(tapes, data.getNumberOfTape());
