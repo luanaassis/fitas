@@ -13,15 +13,17 @@ public class Intercalation {
         this.numberOfTapes = numberOfTapes;
         this.outputFileName = outputFileName;
         this.intercalationTapes = new PriorityQueue<>((a, b) -> {
-            if (a.getNumberOfViews() < b.getNumberOfViews()) {
-                return +1;
-            }
-
-            if (a.getUrl().compareTo(b.getUrl()) < 0) {
-                return +1;
-            } else {
+            if (a.getNumberOfViews() > b.getNumberOfViews()) {
                 return -1;
             }
+
+            if (a.getNumberOfViews() == b.getNumberOfViews()) {
+                if (a.getUrl().compareTo(b.getUrl()) < 0) {
+                    return -1;
+                }
+            }
+            
+            return +1;
         });
     }
 
