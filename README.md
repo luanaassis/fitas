@@ -1,4 +1,6 @@
-# Fitas
+<h1 align="center">
+    loop</br>Fitas
+</h1>
 
 ## 💻 Grupo
 
@@ -19,13 +21,37 @@ O ambiente de trabalho utilizado foi o Visual Studio Code. Os arquivos foram org
 
 Obs: para rodar usando a extensão é necessário algumas alterações no código.
 
-## 🔨 Classes e Métodos
+## 🔨 Classes
 
 <p align="center">
     <strong>Diagrama de classes</strong>
     </br>
     <img src="./images/diagramaDeClasses.png" />
 </p>
+
+### App
+
+Classe destinada a receber as informações de entrada (arquivo de entrada, arquivo de saída, memória) e fazer as principais chamadas do projeto.
+
+### Intercalation
+
+Classe responsável pela leitura da fita de entrada, criação de fitas, intercalação de fitas e geração da fita de saída..
+
+### QuickSortArray
+
+Classe responsável pela ordenação das fitas criadas. A implementa um array de URLs, onde o tamanho máximo é igual ao tamanho da memória, o método usado pra ordenação é o `QuickSort`, ordenado pela quantidade de número de visitas de um URL e ordem alfabética. Caso o array não esteja completo na hora de ordenar, o mesmo é recriado reduzindo o seu tamanho para evitar possíveis erros.
+
+### ReadTape
+
+Classe destinada apenas a leitura das fitas. A classe implementa um `Iterable<Url>`, assim a cada linha lida em uma fita é transformada em um objeto da classe URL para a manipulação.
+
+### Url
+
+Classe modelo para a manipulação de URL no projeto, descreve seu formato e funções básicas.
+
+### WriteTape
+
+Class destinada apenas a criação e escrita em fitas.
 
 ## 🔎 Análise de Complexidade
 
