@@ -1,5 +1,5 @@
 <h1 align="center">
-    loop</br>Fitas
+    📼</br>Fitas
 </h1>
 
 ## 💻 Grupo
