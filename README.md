@@ -51,7 +51,7 @@ Classe modelo para a manipulação de URL no projeto, descreve seu formato e fun
 
 ### WriteTape
 
-Class destinada apenas a criação e escrita em fitas.
+Class destinada a criação e escrita em fitas. A classe recebe as informações em objetos da classe URL e transforma em String para a escrita.
 
 ## 🔎 Análise de Complexidade
 
