@@ -20,7 +20,6 @@ public class Intercalation {
 
     public int readInputFile() throws IOException {
         ReadTape readerInput = new ReadTape(inputFileName);
-
         int numberOfTapes = 1;
         WriteTape createTapes = new WriteTape(numberOfTapes);
         QuickSortArray array = new QuickSortArray(memorySize);
@@ -53,33 +52,32 @@ public class Intercalation {
 
     private void intercalation(int numberOfTapes) throws IOException {
         WriteTape output = new WriteTape(outputFileName, isFirstRound);
-        PriorityQueue<Url> intercalation = createIntercalationList();
+        PriorityQueue<Url> intercalationList = createIntercalationList();
         Map<String, ReadTape> tapes = new HashMap<String, ReadTape>();
 
         int size = (isFirstRound) ? memorySize : memorySize - 1;
         for (int i = 0; i < size; i++) {
             if (currentTape > numberOfTapes)
                 break;
-
             tapes.put(Integer.toString(currentTape), new ReadTape(currentTape));
-            readNextLine(tapes.get(Integer.toString(currentTape)), intercalation);
+            getNextUrlIntercalation(tapes.get(Integer.toString(currentTape)), intercalationList);
             currentTape++;
         }
 
         if (!isFirstRound) {
             switchTapes(output);
             tapes.put(Integer.toString(1), new ReadTape(1));
-            readNextLine(tapes.get(Integer.toString(1)), intercalation);
+            getNextUrlIntercalation(tapes.get(Integer.toString(1)), intercalationList);
         }
 
         boolean breakLine = false;
         while (true) {
-            if (intercalation.isEmpty()) {
+            if (intercalationList.isEmpty()) {
                 break;
             } else {
-                Url url = intercalation.poll();
+                Url url = intercalationList.poll();
                 String key = Integer.toString(url.getNumberOfTape());
-                readNextLine(tapes.get(key), intercalation);
+                getNextUrlIntercalation(tapes.get(key), intercalationList);
                 output.writeLine(url, breakLine);
                 breakLine = true;
             }
@@ -88,7 +86,7 @@ public class Intercalation {
         isFirstRound = false;
     }
 
-    private void readNextLine(ReadTape tape, PriorityQueue<Url> intercalation) {
+    private void getNextUrlIntercalation(ReadTape tape, PriorityQueue<Url> intercalation) {
         Url nextUrl = tape.readNextLine();
         if (nextUrl != null) {
             intercalation.add(nextUrl);

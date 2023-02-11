@@ -35,11 +35,20 @@ Classe destinada a receber as informações de entrada (arquivo de entrada, arqu
 
 ### Intercalation
 
-Classe responsável pela leitura da fita de entrada, criação de fitas, intercalação de fitas e geração da fita de saída..
+Classe responsável pela leitura da fita de entrada, criação de fitas, intercalação de fitas e geração da fita de saída.
+
+- `readInputFile` - Este método é responsável por ler os dados do arquivo de entrada com o auxílio da classe ReadTape. Além disso, nele são instaciadas as classes WriteTape e QuickSortArray, pois é também neste método as entidades são inseridas no array para ordenação, as novas fitas são criadas conforme o parâmetro de capacidade da memória e as URLs já ordenadas são escritas nas fitas.
+- `order` - Este método verifica se a fita atual está dentro do intervalo de fitas existentes, e caso sim, chama o método intercalation com o número da fita e ele mesmo novamente.
+- `intercalation` - Este método foi criado com o objetivo de facilitar a intercalação entre as URLs de diferentes fitas. Caso seja a primeira passada, ele possui o tamanho máximo de memória para realizar a intercalação, caso não ele possui -1, visto que um espaço já será usado para mesclar as novas fitas com o arquivo que já possui as anteriores mescladas. Utilizando de uma estrutura de HashMap, ele instacia as fitas e adiciona a primeira URL de cada uma na estrutura `PriorityQueue<Url>` chamando o método getNextUrlIntercalation. Logo, ele verifica qual seria a URL com a maior número de visitas, e pega a próxima URL presente na sua respectiva fita e a escreve no arquivo de saída. Quando não é a primeira passada, ele chama o método switchTapes e adiciona o primeiro arquivo novamente no intercalationList.
+- `switchTapes` - O objetivo deste procedimento é trocar os dados do arquivo de saída para a primeira fita criada. Este método lê os dados do arquivo de saída, limpa os dados contidos na primeira fita, e a preenche com os dados obtidos no arquivo de saída. Logo após este preenchimento, a fita de saída é limpa.
 
 ### QuickSortArray
 
 Classe responsável pela ordenação das fitas criadas. A implementa um array de URLs, onde o tamanho máximo é igual ao tamanho da memória, o método usado pra ordenação é o `QuickSort`, ordenado pela quantidade de número de visitas de um URL e ordem alfabética. Caso o array não esteja completo na hora de ordenar, o mesmo é recriado reduzindo o seu tamanho para evitar possíveis erros.
+
+- `add` - Este método verifica se a lista de URLs está ou não cheia. Caso não, adiciona na lista. Caso sim, altera a flag de que a lista atingiu o seu tamanho máximo.
+- `order` - O order realiza uma verificação se a lista não está cheia e não está vazia, e caso sim, chama o método resizeArray. Logo, chama o método de ordenação quickSort.
+- `resizeArray` - Este método cria um novo array com o tamanho da quantidades de itens que estão preenchidos na urlList, e depois o reatribui a urlList com a nova propriedade.
 
 ### ReadTape
 
