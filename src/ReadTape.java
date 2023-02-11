@@ -4,32 +4,37 @@ import java.io.IOException;
 import java.io.BufferedReader;
 
 public class ReadTape implements AutoCloseable, Iterable<Url> {
+    private int numberOfTape;
     private BufferedReader reader;
-    private String fileName;
     private Iterator<Url> interator;
 
     public ReadTape(String fileName) throws IOException {
-        this.fileName = fileName;
-        reader = new BufferedReader(new FileReader(fileName));
+        this.numberOfTape = 0;
         this.interator = iterator();
+        this.reader = new BufferedReader(new FileReader(fileName));
     }
 
-    public String getFileName() {
-        return this.fileName;
+    public ReadTape(int numberOfTape) throws IOException {
+        this.interator = iterator();
+        this.numberOfTape = numberOfTape;
+        this.reader = new BufferedReader(new FileReader("fita-" + numberOfTape + ".txt"));
     }
 
-    @Override
-    public void close() throws IOException {
-        reader.close();
+    public int getNumberOfTape() {
+        return this.numberOfTape;
     }
 
     public Url readNextLine() {
         Url data = interator.next();
         if (data != null) {
-            int number = Integer.parseInt(fileName.split("-")[1].split(".txt")[0]);
-            data.setNumberOfTape(number);
+            data.setNumberOfTape(numberOfTape);
         }
         return data;
+    }
+
+    @Override
+    public void close() throws IOException {
+        reader.close();
     }
 
     @Override
@@ -42,6 +47,9 @@ public class ReadTape implements AutoCloseable, Iterable<Url> {
                 if (nextLine == null) {
                     try {
                         nextLine = reader.readLine();
+                        if (nextLine != null && nextLine.equals("")) {
+                            nextLine = null;
+                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

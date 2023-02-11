@@ -9,27 +9,33 @@ public class WriteTape {
         this.tape = new File("fita-" + numberOfTape + ".txt");
     }
 
-    public WriteTape(String fileName) {
+    public WriteTape(String fileName, boolean clearFile) {
         this.tape = new File(fileName);
+
+        if (clearFile) 
+            clearTape();
     }
 
     public void writeLine(Url url) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, true));
+            FileWriter fw = new FileWriter(this.tape, true);
+            BufferedWriter bw = new BufferedWriter(fw);
 
-            String text = "\n" + url.toString();
+            bw.write(url.toString() + System.lineSeparator() );
 
-            bw.write(text);
             bw.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void addSection() {
+    public void clearTape() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, true));
-            bw.write("\n");
+            FileWriter fw = new FileWriter(this.tape, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("");
+
             bw.close();
         } catch (Exception e) {
             System.out.println(e);
@@ -38,15 +44,16 @@ public class WriteTape {
 
     public void write(Url[] array) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(this.tape, false));
+            FileWriter fw = new FileWriter(this.tape, false);
+            BufferedWriter bw = new BufferedWriter(fw);
 
             String text = "";
             for (Url url : array) {
-                text += url.getEntity() + "\n";
+                text += url.getEntity() + System.lineSeparator();
             }
             text = text.substring(0, text.length() - 1);
-
             bw.write(text);
+
             bw.close();
         } catch (Exception e) {
             System.out.println(e);

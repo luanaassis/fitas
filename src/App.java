@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class App {
 
-    public static int readInputFile(String inputFileName, int memorySize) throws IOException {
+    private static int readInputFile(String inputFileName, int memorySize) throws IOException {
         ReadTape readerInput = new ReadTape(inputFileName);
 
         int numberOfTapes = 1;
