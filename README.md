@@ -26,7 +26,7 @@ Obs: para rodar usando a extensão é necessário algumas alterações no códig
 <p align="center">
     <strong>Diagrama de classes</strong>
     </br>
-    <img src="./images/diagramaDeClasses.png" />
+    <img src="./images/diagramaClasses.png" />
 </p>
 
 ### App
