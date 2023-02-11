@@ -30,7 +30,8 @@ public class Intercalation {
         PriorityQueue<Url> intercalation = createIntercalationList();
         Map<String, ReadTape> tapes = new HashMap<String, ReadTape>();
 
-        for (int i = 0; i < memorySize; i++) {
+        int size = (isFirstRound) ? memorySize : memorySize - 1;
+        for (int i = 0; i < size; i++) {
             if (currentTape > numberOfTapes)
                 break;
 
