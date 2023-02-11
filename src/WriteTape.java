@@ -54,7 +54,7 @@ public class WriteTape {
 
             String text = "";
             for (Url url : array) {
-                text += url.getEntity() + System.lineSeparator();
+                text += url.getEntity() + "\n";
             }
             text = text.substring(0, text.length() - 1);
             bw.write(text);
