@@ -47,7 +47,9 @@ Classe responsável pela leitura da fita de entrada, criação de fitas, interca
 Classe responsável pela ordenação das fitas criadas. A implementa um array de URLs, onde o tamanho máximo é igual ao tamanho da memória, o método usado pra ordenação é o `QuickSort`, ordenado pela quantidade de número de visitas de um URL e ordem alfabética. Caso o array não esteja completo na hora de ordenar, o mesmo é recriado reduzindo o seu tamanho para evitar possíveis erros.
 
 - `add` - Este método verifica se a lista de URLs está ou não cheia. Caso não, adiciona na lista. Caso sim, altera a flag de que a lista atingiu o seu tamanho máximo.
+
 - `order` - O order realiza uma verificação se a lista não está cheia e não está vazia, e caso sim, chama o método resizeArray. Logo, chama o método de ordenação quickSort.
+
 - `resizeArray` - Este método cria um novo array com o tamanho da quantidades de itens que estão preenchidos na urlList, e depois o reatribui a urlList com a nova propriedade.
 
 ### ReadTape
@@ -71,6 +73,25 @@ Class destinada a criação e escrita em fitas. A classe recebe as informações
 - `write:` Método responsável por escrever um conjunto de URLs em uma fita de uma vez. O método recebe como parâmetro um Array de URLs, o método percorre todo o array concatenando e criando apenas um dado de inserção com todas as URLs.
 
 ## 🔎 Análise de Complexidade
+
+- `readInputFile` - Este método percorre todas as URLs de uma lista (n) e para cada fita que possui até (n/memória) elementos, ele realiza a ordenação através do QuickSortArray que possui complexidade nlogn no caso médio. Portanto, a complexidade deste método é O(n + (n/tamanhoMemoria)*nlogn).
+
+- `order(Intercalation)` - O método order da classe Intercalation é chamado n vezes, sendo que n é a quantidade de fitas. O método também chama o intercalation recursivamente. Portanto, o método possui a complexidade O(n*(nlogn + log n + nm(logn²)))
+
+- `intercalation` - 
+<p align="center">
+    <p>Análise de Complexidade do método Intercalation</p>
+    </br>
+    <img src="./images/complexidadeIntercalation.png" />
+</p>
+
+- `switchTapes` - O método switchTapes possui a complexidade O(n), onde n é a quantidade de entidades presentes no arquivo de saída (output).
+
+- `add` - O método add da classe QuickSortArray tem a complexidade O(1) pois acessa o index a ser inserido diretamente.
+
+- `order(QuickSortArray)` - O método order da classe QuickSortArray, chama o método recizeArray, que possui complexidade O(n) e o método quickSort que possui complexidade O(nlogn) no caso médio e O(n²) no pior caso. Portanto no caso médio a funcionalidade possui complexidade O(nlogn).
+
+- `resizeArray` - O método recizeArray tem a complexidade O(n), onde n é a quantidade de entidades presentes no urlList. Um adendo é que n neste caso sempre será menor que o tamanho máximo da memória.
 
 - `readNextLine:` A função readNextLine possui a complexidade de O(1). Através de um interator a função verifica a existência de uma próxima linha, caso exista ele retorna e guarda a posição atual, assim seu custo sempre será de O(1).
 
