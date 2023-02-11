@@ -21,6 +21,12 @@ Obs: para rodar usando a extensão é necessário algumas alterações no códig
 
 ## 🔨 Classes e Métodos
 
+<p align="center">
+    <strong>Diagrama de classes</strong>
+    </br>
+    <img src="./images/diagramaDeClasses.png" />
+</p>
+
 ## 🔎 Análise de Complexidade
 
 ## 🔚 Conclusão
