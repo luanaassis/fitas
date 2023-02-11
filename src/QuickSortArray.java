@@ -5,10 +5,10 @@ public class QuickSortArray {
     private boolean isEmpty;
 
     public QuickSortArray(int memorySize) {
-        this.urlList = new Url[memorySize];
         this.index = 0;
         this.isFull = false;
         this.isEmpty = true;
+        this.urlList = new Url[memorySize];
     }
 
     public void add(Url data) {
@@ -31,6 +31,7 @@ public class QuickSortArray {
     }
 
     public Url[] getUrls() {
+        order();
         return this.urlList;
     }
 
@@ -79,7 +80,7 @@ public class QuickSortArray {
         this.urlList = aux;
     }
 
-    public void order() {
+    private void order() {
         if (!isFull() && !isEmpty())
             resizeArray();
         quickSort(this.urlList, 0, this.urlList.length - 1);

@@ -6,26 +6,52 @@ import java.util.PriorityQueue;
 public class Intercalation {
     private int memorySize;
     private int currentTape;
-    private int numberOfTapes;
+    private String inputFileName;
     private boolean isFirstRound;
     private String outputFileName;
 
-    public Intercalation(int numberOfTapes, int memorySize, String outputFileName) {
+    public Intercalation(String inputFileName, String outputFileName, int memorySize) {
         this.currentTape = 1;
         this.isFirstRound = true;
         this.memorySize = memorySize;
-        this.numberOfTapes = numberOfTapes;
+        this.inputFileName = inputFileName;
         this.outputFileName = outputFileName;
     }
 
-    public void order() throws IOException {
+    public int readInputFile() throws IOException {
+        ReadTape readerInput = new ReadTape(inputFileName);
+
+        int numberOfTapes = 1;
+        WriteTape createTapes = new WriteTape(numberOfTapes);
+        QuickSortArray array = new QuickSortArray(memorySize);
+        for (Url url : readerInput) {
+            array.add(url);
+
+            if (array.isFull()) {
+                createTapes.write(array.getUrls());
+                array = new QuickSortArray(memorySize);
+                numberOfTapes++;
+                createTapes = new WriteTape(numberOfTapes);
+            }
+        }
+
+        if (!array.isEmpty() && !array.isFull()) {
+            createTapes.write(array.getUrls());
+            numberOfTapes++;
+        }
+
+        readerInput.close();
+        return numberOfTapes - 1;
+    }
+
+    public void order(int numberOfTapes) throws IOException {
         if (currentTape <= numberOfTapes) {
-            intercalation();
-            order();
+            intercalation(numberOfTapes);
+            order(numberOfTapes);
         }
     }
 
-    private void intercalation() throws IOException {
+    private void intercalation(int numberOfTapes) throws IOException {
         WriteTape output = new WriteTape(outputFileName, isFirstRound);
         PriorityQueue<Url> intercalation = createIntercalationList();
         Map<String, ReadTape> tapes = new HashMap<String, ReadTape>();
