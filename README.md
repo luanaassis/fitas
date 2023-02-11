@@ -21,7 +21,7 @@ O ambiente de trabalho utilizado foi o Visual Studio Code. Os arquivos foram org
 
 Obs: para rodar usando a extensão é necessário algumas alterações no código.
 
-## 🔨 Classes
+## 🔨 Classes e Métodos
 
 <p align="center">
     <strong>Diagrama de classes</strong>
@@ -45,15 +45,31 @@ Classe responsável pela ordenação das fitas criadas. A implementa um array de
 
 Classe destinada apenas a leitura das fitas. A classe implementa um `Iterable<Url>`, assim a cada linha lida em uma fita é transformada em um objeto da classe URL para a manipulação.
 
+- `readNextLine:` Função responsável por ler a próxima linha de um arquivo usando um interator e retorna uma URL. Após ler uma linha o método seta o número de fita da URL, se a fita for a de output que não possui um valor é atribuído o número 0, caso contrário o valor é o mesmo da fita.
+
 ### Url
 
 Classe modelo para a manipulação de URL no projeto, descreve seu formato e funções básicas.
+
+- `fromStringRep:` Função responsável por receber uma entidade em String diretamente de uma fita e retornar um objeto URL.
 
 ### WriteTape
 
 Class destinada a criação e escrita em fitas. A classe recebe as informações em objetos da classe URL e transforma em String para a escrita.
 
+- `writeLine:` Método responsável por escrever uma nova linha em uma fita. O método recebe dois parâmetros: uma URL que deseja escrever em uma fita e uma variável boolean para decidir se deve ou não quebrar linha.
+
+- `write:` Método responsável por escrever um conjunto de URLs em uma fita de uma vez. O método recebe como parâmetro um Array de URLs, o método percorre todo o array concatenando e criando apenas um dado de inserção com todas as URLs.
+
 ## 🔎 Análise de Complexidade
+
+- `readNextLine:` A função readNextLine possui a complexidade de O(1). Através de um interator a função verifica a existência de uma próxima linha, caso exista ele retorna e guarda a posição atual, assim seu custo sempre será de O(1).
+
+- `fromStringRep:` A função fromStringRep possui a complexidade de O(1). Pois apenas recebe uma entidade em String por parâmetro e retorna um objeto novo URL.
+
+- `writeLine:` O método writeLine possui a complexidade de O(1). Por se tratar de apenas uma entidade a ser gravada, o método não necessita de nenhum gasto computacional além de acessar o arquivo e gravar a informação.
+
+- `write:` O método write possui a complexidade de O(N), onde N é o tamanho do array de de URLs passadas por parâmetro para função. Como é necessário formar apenas um dado a inserção é necessário percorrer todo o array.
 
 ## 🔚 Conclusão
 
