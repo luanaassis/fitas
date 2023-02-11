@@ -72,6 +72,7 @@ public class Intercalation {
             readNextLine(tapes.get(Integer.toString(1)), intercalation);
         }
 
+        boolean breakLine = false;
         while (true) {
             if (intercalation.isEmpty()) {
                 break;
@@ -79,7 +80,8 @@ public class Intercalation {
                 Url url = intercalation.poll();
                 String key = Integer.toString(url.getNumberOfTape());
                 readNextLine(tapes.get(key), intercalation);
-                output.writeLine(url);
+                output.writeLine(url, breakLine);
+                breakLine = true;
             }
         }
 
@@ -99,8 +101,10 @@ public class Intercalation {
         WriteTape firstTape = new WriteTape(1);
         firstTape.clearTape();
 
+        boolean breakLine = false;
         for (Url url : outputRead) {
-            firstTape.writeLine(url);
+            firstTape.writeLine(url, breakLine);
+            breakLine = true;
         }
 
         outputRead.close();

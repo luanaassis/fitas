@@ -16,12 +16,17 @@ public class WriteTape {
             clearTape();
     }
 
-    public void writeLine(Url url) {
+    public void writeLine(Url url, boolean breakLine) {
         try {
             FileWriter fw = new FileWriter(this.tape, true);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            bw.write(url.toString() + System.lineSeparator() );
+            String text = url.toString();
+            if (breakLine) {
+                text = System.lineSeparator() + text;
+            }
+
+            bw.write(text);
 
             bw.close();
         } catch (Exception e) {
