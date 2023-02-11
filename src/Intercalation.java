@@ -13,15 +13,17 @@ public class Intercalation {
         this.numberOfTapes = numberOfTapes;
         this.outputFileName = outputFileName;
         this.intercalationTapes = new PriorityQueue<>((a, b) -> {
-            if (a.getNumberOfViews() < b.getNumberOfViews()) {
-                return +1;
-            }
-
-            if (a.getUrl().compareTo(b.getUrl()) < 0) {
-                return +1;
-            } else {
+            if (a.getNumberOfViews() > b.getNumberOfViews()) {
                 return -1;
             }
+
+            if (a.getNumberOfViews() == b.getNumberOfViews()) {
+                if (a.getUrl().compareTo(b.getUrl()) < 0) {
+                    return -1;
+                }
+            }
+
+            return +1;
         });
     }
 
@@ -39,17 +41,15 @@ public class Intercalation {
         ReadTape[] tapes = new ReadTape[tapesSize];
 
         for (int i = 0; i < tapesSize; i++) {
-            if (this.currentTape <= this.numberOfTapes) {
-                tapes[i] = new ReadTape("fita-" + this.currentTape + ".txt");
-                Url url = tapes[i].readNextLine();
-                if (url != null) {
-                    this.intercalationTapes.add(url);
-                }
-                this.currentTape++;
-            } else {
-                tapes[i] = null;
-                continue;
+            if (this.currentTape > this.numberOfTapes)
+                break;
+
+            tapes[i] = new ReadTape("fita-" + this.currentTape + ".txt");
+            Url url = tapes[i].readNextLine();
+            if (url != null) {
+                this.intercalationTapes.add(url);
             }
+            this.currentTape++;
         }
 
         return tapes;
@@ -60,12 +60,11 @@ public class Intercalation {
         ReadTape[] tapes = createTapes();
         while (true) {
             if (this.intercalationTapes.isEmpty()) {
-                if (this.currentTape > this.numberOfTapes) {
+                if (this.currentTape > this.numberOfTapes)
                     break;
-                } else {
-                    output.addSection();
-                    tapes = createTapes();
-                }
+
+                output.addSection();
+                tapes = createTapes();
             } else {
                 Url data = this.intercalationTapes.poll();
                 int index = findIndex(tapes, data.getNumberOfTape());
